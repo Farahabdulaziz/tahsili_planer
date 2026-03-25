@@ -203,14 +203,6 @@
   }
 
   /* STATS */
-  .stats {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 60px;
-    flex-wrap: wrap;
-    animation: fadeUp 0.8s 0.4s ease both;
-  }
   .stat {
     text-align: center;
   }
@@ -513,6 +505,83 @@
     cursor: not-allowed;
     transform: none;
   }
+  .sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.source-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.source-number {
+  min-width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(212,168,67,0.14);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.source-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.source-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.source-main {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 6px;
+}
+
+.source-note {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .source-card {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .source-title {
+    font-size: 0.9rem;
+  }
+
+  .source-main,
+  .source-note {
+    font-size: 0.84rem;
+    line-height: 1.7;
+  }
+
+  .source-number {
+    min-width: 30px;
+    height: 30px;
+    font-size: 0.82rem;
+  }}
 
   /* RESULT */
   #result {
@@ -863,10 +932,6 @@
     <div class="stat">
       <span class="stat-num">95–100</span>
       <span class="stat-label">درجات الطلاب المذكورة</span>
-    </div>
-    <div class="stat">
-      <span class="stat-num">4</span>
-      <span class="stat-label">مواد التحصيلي العلمي</span>
     </div>
   </div>
 </div>
@@ -1360,8 +1425,26 @@ function generatePlan() {
 
     <div class="plan-section">
       <h4>📚 3) المصادر الموصى بها</h4>
-      <ul>${sources}</ul>
-      <ul><li><strong>التجميعات لجميع المواد:</strong> غشام القوت أولًا، ثم يلو، ثم توقعات أينشتاين في المرحلة الأخيرة.</li></ul>
+      <div class="sources-list">
+        ${priority.map((s, idx) => `
+          <div class="source-card">
+            <div class="source-number">${idx + 1}</div>
+            <div class="source-body">
+              <div class="source-title">${s.name}</div>
+              <div class="source-main">${s.source}</div>
+              <div class="source-note">📌 ${s.why}</div>
+            </div>
+          </div>
+        `).join('')}
+    
+        <div class="source-card">
+          <div class="source-number">★</div>
+          <div class="source-body">
+            <div class="source-title">التجميعات</div>
+            <div class="source-main">غشام القوت أولًا، ثم يلو، ثم توقعات أينشتاين في المرحلة الأخيرة.</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="plan-section">
