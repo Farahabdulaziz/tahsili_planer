@@ -1278,7 +1278,7 @@
     <div class="planner-body">
 
       <div class="form-group">
-        <label>اكتب اقتراحك أو مشكلتك</label>
+        <label>💬 كل اقتراح نقرأه ونطوّر الموقع بناءً عليه</label>
       </div>
 
       <a href="https://forms.gle/2SF3taabngZjcupM7" target="_blank" class="generate-btn">
@@ -1313,19 +1313,6 @@ function setStrength(subj, level, btn) {
   btn.classList.add(`active-${level}`);
 }
 
-function sendFeedback() {
-  const text = document.getElementById("feedbackText").value;
-
-  if (!text.trim()) {
-    alert("اكتب شيء أول");
-    return;
-  }
-
-  // مؤقت: مجرد عرض رسالة
-  document.getElementById("feedbackMsg").innerText = "تم إرسال رأيك 👍";
-
-  console.log("Feedback:", text);
-}
 
 function getArabicLevel(level) {
   return level === 'weak' ? 'ضعيف' : level === 'medium' ? 'متوسط' : 'قوي';
